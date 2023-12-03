@@ -8,6 +8,8 @@ namespace AdventOfCode2023
 		{
 			Console.WriteLine(Day1.GetCalibrationValuesSum_v1());
 			Console.WriteLine(Day1.GetCalibrationValuesSum_v2());
+			Console.WriteLine(Day2.GetPossibleGamesIdsSum_v1());
+			Console.WriteLine(Day2.GetPossibleGamesIdsSum_v2());
 		}
 	}
 }
