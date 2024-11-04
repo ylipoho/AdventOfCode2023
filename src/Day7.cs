@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace AdventOfCode2023.src
 {
 	public static class Day7
 	{
-		private static char[] cards_v1 = new char[] { '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A' };
-		private static char[] cards_v2 = new char[] { 'J', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'Q', 'K', 'A' };
+		private static readonly char[] cards_v1 = new char[] { '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A' };
+		private static readonly char[] cards_v2 = new char[] { 'J', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'Q', 'K', 'A' };
 
 		public static long GetTotalWinnings_v1()
 		{
@@ -30,17 +23,12 @@ namespace AdventOfCode2023.src
 																int.Parse(Regex.Match(l, @"(?<= )(.+)").Value)))
 													.ToList();
 
-			tuples.Sort(compare_v1);
-
-			foreach (var tuple in tuples)
-			{
-				Console.WriteLine(tuple);
-			}
+			tuples.Sort(Compare_v1);
 
 			return tuples.Select((t, index) =>	t.Item2 * (index + 1)).Sum();
 		}
 
-		private static int compare_v1(Tuple<string, int> xHand, Tuple<string, int> yHand)
+		private static int Compare_v1(Tuple<string, int> xHand, Tuple<string, int> yHand)
 		{
 			string x = xHand.Item1;
 			string y = yHand.Item1;
@@ -71,28 +59,20 @@ namespace AdventOfCode2023.src
 		private static int EstimateItem_v1(string item)
 		{
 			var itemData = item.GroupBy(x => x).OrderByDescending(x => x.Count());
-			int cost = 0;
 
-			switch (itemData.Count())
+			return itemData.Count() switch
 			{
-				case 1: // TTTTT
-					cost = 6;
-					break;
-				case 2: // AA8AA : 23332
-					cost = item.Count(d => d == itemData.First().ToList()[0]) == 4 ? 5 : 4;
-					break;
-				case 3: // TTT98 : 23432
-					cost = itemData.ElementAt(0).Count() == itemData.ElementAt(1).Count() ? 2 : 3;
-					break;
-				case 4: // AA234
-					cost = 1;
-					break;
-				default: // 12345
-					cost = 0;
-					break;
-			}
-
-			return cost;
+				// TTTTT
+				1 => 6,
+				// AA8AA : 23332
+				2 => item.Count(d => d == itemData.First().ToList()[0]) == 4 ? 5 : 4,
+				// TTT98 : 23432
+				3 => itemData.ElementAt(0).Count() == itemData.ElementAt(1).Count() ? 2 : 3,
+				// AA234
+				4 => 1,
+				// 12345
+				_ => 0,
+			};
 		}
 
 
@@ -112,21 +92,12 @@ namespace AdventOfCode2023.src
 																int.Parse(Regex.Match(l, @"(?<= )(.+)").Value)))
 													.ToList();
 
-			tuples.Sort(compare_v2);
-
-			foreach (var tuple in tuples)
-			{
-				Console.WriteLine(tuple);
-			}
+			tuples.Sort(Compare_v2);
 
 			return tuples.Select((t, index) => t.Item2 * (index + 1)).Sum();
-			// 251821661 is too low((
-			// 252898370 is the answer
-			// 252907464 is too high ((
-			// 254122006 is too high((
 		}
 
-		private static int compare_v2(Tuple<string, int> xHand, Tuple<string, int> yHand)
+		private static int Compare_v2(Tuple<string, int> xHand, Tuple<string, int> yHand)
 		{
 			string x = xHand.Item1;
 			string y = yHand.Item1;
@@ -155,33 +126,11 @@ namespace AdventOfCode2023.src
 
 		private static int EstimateItem_v2(string item)
 		{
-			item = Day7.getJUpdatedItem(item);
-			var itemData = item.GroupBy(x => x).OrderByDescending(x => x.Count());
-			int cost = 0;
-
-			switch (itemData.Count())
-			{
-				case 1: // TTTTT
-					cost = 6;
-					break;
-				case 2: // AA8AA : 23332
-					cost = item.Count(d => d == itemData.First().ToList()[0]) == 4 ? 5 : 4;
-					break;
-				case 3: // TTT98 : 23432
-					cost = itemData.ElementAt(0).Count() == itemData.ElementAt(1).Count() ? 2 : 3;
-					break;
-				case 4: // AA234
-					cost = 1;
-					break;
-				default: // 12345
-					cost = 0;
-					break;
-			}
-
-			return cost;
+			item = Day7.GetJUpdatedItem(item);
+			return EstimateItem_v1(item);
 		}
 
-		private static string getJUpdatedItem(string item)
+		private static string GetJUpdatedItem(string item)
 		{
 			if (item.Contains('J') && item.Count(x => x == 'J') < 5)
 			{

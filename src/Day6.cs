@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace AdventOfCode2023.src
 {
@@ -14,7 +7,7 @@ namespace AdventOfCode2023.src
 		public static int GetWaysToWinNumberMultiplication_v1()
 		{
 			string fileName = @"..\..\..\resources\Day6-Input.txt";
-			string[] lines = new string[0];
+			string[] lines = Array.Empty<string>();
 
 			if (File.Exists(fileName))
 			{
@@ -30,17 +23,15 @@ namespace AdventOfCode2023.src
 			}
 			int[] requiredWinsCounts = new int[records[0].Length];
 
-			// каждая гонка
 			for ( int i = 0; i < records[0].Length; i++)
 			{
 				
 				int time = records[0][i];
 
 				List<int> results = new List<int>();
-				// разбираем каждый вариант
+
 				for (int j=1; j < time; j++)
 				{
-					// j - скорость, time-j - оставшееся время движения
 					results.Add(j * (time - j));
 				}
 
@@ -53,7 +44,7 @@ namespace AdventOfCode2023.src
 		public static int GetWaysToWinNumberMultiplication_v2()
 		{
 			string fileName = @"..\..\..\resources\Day6-Input.txt";
-			string[] lines = new string[0];
+			string[] lines = Array.Empty<string>();
 
 			if (File.Exists(fileName))
 			{
@@ -74,10 +65,8 @@ namespace AdventOfCode2023.src
 			long time = records[0];
 			List<long> results = new List<long>();
 
-			// разбираем каждый вариант
 			for (int j = 0; j < time; j++)
 			{
-				// j - скорость, time-j - оставшееся время движения
 				results.Add(j * (time - j));
 			}
 

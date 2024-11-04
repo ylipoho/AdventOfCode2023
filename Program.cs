@@ -13,8 +13,8 @@ namespace AdventOfCode2023
 			//Console.WriteLine(Day3.GetEngineNumbersSum_v1());
 			//Console.WriteLine(Day4.GetCardsWorth_v1());
 			//Console.WriteLine(Day4.GetCardsWorth_v2());
-			////Console.WriteLine(Day5.GetLowestLocation_v1());
-			////Console.WriteLine(Day5.GetLowestLocation_v2());
+			//Console.WriteLine(Day5.GetLowestLocation_v1());
+			//Console.WriteLine(Day5.GetLowestLocation_v2());
 			//Console.WriteLine(Day6.GetWaysToWinNumberMultiplication_v1());
 			//Console.WriteLine(Day6.GetWaysToWinNumberMultiplication_v2());
 			//Console.WriteLine(Day7.GetTotalWinnings_v1());

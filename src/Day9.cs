@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
-namespace AdventOfCode2023.src
+﻿namespace AdventOfCode2023.src
 {
 	public static class Day9
 	{
@@ -25,8 +18,6 @@ namespace AdventOfCode2023.src
 												.ToList();
 			
 			return histories.Select(history => GetNextLevel(history)).Sum();
-			// v1 = 1974232246
-			// v2 - 928
 		}
 
 		static int GetNextLevel(List<int> input)
@@ -44,9 +35,6 @@ namespace AdventOfCode2023.src
 				newValue = GetNextLevel(output);
 			}
 
-			// v1
-			//return input.Last() + newValue;
-			// v2
 			return input.First() - newValue;
 		}
 	}

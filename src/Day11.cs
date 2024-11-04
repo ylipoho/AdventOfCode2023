@@ -14,11 +14,6 @@
 
 			List<string> space = ExpandUniverse(lines.ToList());
 
-			foreach (var s in space)
-			{
-				Console.WriteLine(s);
-			}
-
 			List<(int, int)> galaxies = new List<(int, int)>();
 
 			for (int i = 0; i < space.Count; i++)
@@ -34,7 +29,6 @@
 
 			long sum = 0;
 
-			// number of pairs is 96141 , its correct.
 			for (int i = 0; i < galaxies.Count; i++)
 			{
 				for (int j = i + 1; j < galaxies.Count; j++)
@@ -70,7 +64,7 @@
 			rowIndexes.Reverse();
 			columnIndexes.Reverse();
 
-			string newRow = new string('.', space[0].Count());
+			string newRow = new string('.', space[0].Length);
 
 			foreach (var rowIndex in rowIndexes)
 			{
@@ -134,7 +128,6 @@
 
 			long sum = 0;
 
-			// number of pairs is 96141 , its correct.
 			for (int i = 0; i < galaxies.Count; i++)
 			{
 				for (int j = i + 1; j < galaxies.Count; j++)
@@ -153,11 +146,6 @@
 			}
 
 			return sum;
-			// 46529995056210 is too high-.-
-			//   630729056210 is too high-.-
-			//   630728425490
-			//   622231056210 is too low-.-
-			//   diff is 8498 times. (*000 000)
 		}
 	}
 }

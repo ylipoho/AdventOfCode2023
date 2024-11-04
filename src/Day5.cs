@@ -7,7 +7,7 @@ namespace AdventOfCode2023.src
 		public static long GetLowestLocation_v1()
 		{
 			string fileName = @"..\..\..\resources\Day5-Input.txt";
-			string[] lines = new string[0];
+			string[] lines = Array.Empty<string>();
 
 			if (File.Exists(fileName))
 			{
@@ -29,13 +29,11 @@ namespace AdventOfCode2023.src
 			// index of first line with 3 numbers
 			int firstDataLineIndex = 3;
 
-			// ПРОХОД ПО КАЖДОЙ МАПЕ
-			for (int i = 0; i < mapHeaderLines.Count() - 1; i++)
+			for (int i = 0; i < mapHeaderLines.Length - 1; i++)
 			{
 				List<long[]> map = new List<long[]>();
 
-				// на каждом проходе заполнить 1 карту 
-				while (firstDataLineIndex < lines.Count() && lines[firstDataLineIndex].Any(c => char.IsDigit(c)))
+				while (firstDataLineIndex < lines.Length && lines[firstDataLineIndex].Any(c => char.IsDigit(c)))
 				{
 					long[] threeValue = Regex.Matches(lines[firstDataLineIndex], @"\d+")
 									.Select(v => long.Parse(v.Value))
@@ -46,15 +44,14 @@ namespace AdventOfCode2023.src
 
 				firstDataLineIndex += 2;
 
-				// для каждой семечки
-				for (int j = 0; j < seeds.Count(); j++)
+				for (int j = 0; j < seeds.Length; j++)
 				{
 					long currentSeedParameter = -1;
-					// пройтись по всем строкам 1ой мапы
+					
 					for (int k = 0; k < map.Count; k++)
 					{
 						long diff = seeds[j] - map[k][1];
-						if (diff >0 && diff <= map[k][2])
+						if (diff > 0 && diff <= map[k][2])
 						{
 							currentSeedParameter = map[k][0] + diff;
 							break;
@@ -62,19 +59,9 @@ namespace AdventOfCode2023.src
 					}
 
 					seeds[j] = currentSeedParameter < 0 ? seeds[j] : currentSeedParameter;
-					Console.WriteLine("seeds[" + j+ "]= " + seeds[j]);
-					// нашли location
 				}
-
-				int a = 0;
 			}
 
-			foreach (var r in seeds)
-			{
-				Console.WriteLine("r = "+r);
-			}
-
-			// 157211394
 			return seeds.Min();
 		}
 	}

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace AdventOfCode2023.src
 {
@@ -72,7 +67,7 @@ namespace AdventOfCode2023.src
 			int currentLRIndex = 0;
 			string[] currentLetters = words.Where(w => w[0][2] == 'A')
 											.Select(w => w[0])
-											.ToArray();//"RCA", "GDA", "NPA", "LVA", "SLA", "AAA"
+											.ToArray(); // "RCA", "GDA", "NPA", "LVA", "SLA", "AAA"
 			int[] steps = new int[currentLetters.Length];
 			int currentPattern = 1;
 			string[] currentLine;
@@ -96,7 +91,6 @@ namespace AdventOfCode2023.src
 			}
 
 			return stepsCount;
-			// 9,177,460,370,549
 		}
 
 		static long GetGCD(long a, long b)
