@@ -6,13 +6,7 @@ namespace AdventOfCode2023.src
 	{
 		public static int GetCalibrationValuesSum_v1()
 		{
-			string fileName = @"..\..\..\resources\Day1-Input.txt";
-			string[] lines = new string[0];
-
-			if (File.Exists(fileName))
-			{
-				lines = File.ReadAllLines(fileName);
-			}
+			var lines = FileReader.ReadFile("1");
 
 			return (int)lines
 				.Select(l => 
@@ -23,19 +17,13 @@ namespace AdventOfCode2023.src
 
 		public static int GetCalibrationValuesSum_v2()
 		{
-			string fileName = @"..\..\..\resources\Day1-Input.txt";
 			string digitsRegex = "1|2|3|4|5|6|7|8|9|one|two|three|four|five|six|seven|eight|nine";
 			Dictionary<string, int> digitsDictionary = new Dictionary<string, int>()
 			{
 				{"one", 1}, {"two", 2},{"three", 3}, {"four", 4}, {"five", 5}, {"six", 6}, {"seven", 7}, {"eight", 8}, {"nine", 9}
 			};
-			string[] lines = new string[0];
 
-			if (File.Exists(fileName))
-			{
-				lines = File.ReadAllLines(fileName);
-			}
-
+			var lines = FileReader.ReadFile("1");
 			int sum = 0;
 
 			foreach (string line in lines)

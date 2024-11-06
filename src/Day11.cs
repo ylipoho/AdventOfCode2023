@@ -4,16 +4,7 @@
 	{
 		public static long GetLengthsSum_v1()
 		{
-			string fileName = @"..\..\..\resources\Day11-Input.txt";
-			List<string> lines = new List<string>();
-
-			if (File.Exists(fileName))
-			{
-				lines = File.ReadAllLines(fileName).ToList();
-			}
-
-			List<string> space = ExpandUniverse(lines.ToList());
-
+			List<string> space = ExpandUniverse(FileReader.ReadFile("11").ToList());
 			List<(int, int)> galaxies = new List<(int, int)>();
 
 			for (int i = 0; i < space.Count; i++)
@@ -34,6 +25,64 @@
 				for (int j = i + 1; j < galaxies.Count; j++)
 				{
 					sum += (Math.Abs(galaxies[i].Item1 - galaxies[j].Item1) + Math.Abs(galaxies[i].Item2 - galaxies[j].Item2));
+				}
+			}
+
+			return sum;
+		}
+
+		public static long GetLengthsSum_v2()
+		{
+		
+			List<string> lines = FileReader.ReadFile("11").ToList();
+			List<(int, int)> galaxies = new List<(int, int)>();
+
+			for (int i = 0; i < lines.Count; i++)
+			{
+				for (int j = 0; j < lines[i].Length; j++)
+				{
+					if (lines[i][j] == '#')
+					{
+						galaxies.Add((i, j));
+					}
+				}
+			}
+
+			List<int> rowIndexes = new List<int>();
+			List<int> columnIndexes = new List<int>();
+
+			for (int i = 0; i < lines.Count; i++)
+			{
+				if (lines[i].All(s => s == '.'))
+				{
+					rowIndexes.Add(i);
+				}
+			}
+
+			for (int i = 0; i < lines[0].Length; i++)
+			{
+				if (lines.All(s => s[i] == '.'))
+				{
+					columnIndexes.Add(i);
+				}
+			}
+
+			long sum = 0;
+
+			for (int i = 0; i < galaxies.Count; i++)
+			{
+				for (int j = i + 1; j < galaxies.Count; j++)
+				{
+					int maxX = Math.Max(galaxies[i].Item1, galaxies[j].Item1);
+					int minX = Math.Min(galaxies[i].Item1, galaxies[j].Item1);
+					int maxY = Math.Max(galaxies[i].Item2, galaxies[j].Item2);
+					int minY = Math.Min(galaxies[i].Item2, galaxies[j].Item2);
+
+					sum += (maxX - minX) + (maxY - minY);
+
+					int count = rowIndexes.Count(x => (minX < x) && (x < maxX));
+					int count2 = columnIndexes.Count(y => (minY < y) && (y < maxY));
+					sum += (count + count2) * (1000000 - 1);
 				}
 			}
 
@@ -80,72 +129,6 @@
 			}
 
 			return space;
-		}
-
-		public static long GetLengthsSum_v2()
-		{
-			string fileName = @"..\..\..\resources\Day11-Input.txt";
-			List<string> lines = new List<string>();
-
-			if (File.Exists(fileName))
-			{
-				lines = File.ReadAllLines(fileName).ToList();
-			}
-
-			List<string> space = lines;
-
-			List<(int, int)> galaxies = new List<(int, int)>();
-
-			for (int i = 0; i < space.Count; i++)
-			{
-				for (int j = 0; j < space[i].Length; j++)
-				{
-					if (space[i][j] == '#')
-					{
-						galaxies.Add((i, j));
-					}
-				}
-			}
-
-			List<int> rowIndexes = new List<int>();
-			List<int> columnIndexes = new List<int>();
-
-			for (int i = 0; i < space.Count; i++)
-			{
-				if (space[i].All(s => s == '.'))
-				{
-					rowIndexes.Add(i);
-				}
-			}
-
-			for (int i = 0; i < space[0].Length; i++)
-			{
-				if (space.All(s => s[i] == '.'))
-				{
-					columnIndexes.Add(i);
-				}
-			}
-
-			long sum = 0;
-
-			for (int i = 0; i < galaxies.Count; i++)
-			{
-				for (int j = i + 1; j < galaxies.Count; j++)
-				{
-					int maxX = Math.Max(galaxies[i].Item1, galaxies[j].Item1);
-					int minX = Math.Min(galaxies[i].Item1, galaxies[j].Item1);
-					int maxY = Math.Max(galaxies[i].Item2, galaxies[j].Item2);
-					int minY = Math.Min(galaxies[i].Item2, galaxies[j].Item2);
-
-					sum += (maxX - minX) + (maxY - minY);
-
-					int count = rowIndexes.Count(x => (minX < x) && (x < maxX));
-					int count2 = columnIndexes.Count(y => (minY < y) && (y < maxY));
-					sum += (count + count2) * (1000000 - 1);
-				}
-			}
-
-			return sum;
 		}
 	}
 }

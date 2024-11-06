@@ -9,13 +9,7 @@ namespace AdventOfCode2023.src
 
 		public static long GetTotalWinnings_v1()
 		{
-			string fileName = @"..\..\..\resources\Day7-Input.txt";
-			List<string> lines = new List<string>();
-
-			if (File.Exists(fileName))
-			{
-				lines = File.ReadAllLines(fileName).ToList();
-			}
+			var lines = FileReader.ReadFile("7");
 
 			List<Tuple<string, int>> tuples = lines.Select(l =>
 															new Tuple<string, int>(
@@ -78,13 +72,7 @@ namespace AdventOfCode2023.src
 
 		public static long GetTotalWinnings_v2()
 		{
-			string fileName = @"..\..\..\resources\Day7-Input.txt";
-			List<string> lines = new List<string>();
-
-			if (File.Exists(fileName))
-			{
-				lines = File.ReadAllLines(fileName).ToList();
-			}
+			var lines = FileReader.ReadFile("7");
 
 			List<Tuple<string, int>> tuples = lines.Select(l =>
 															new Tuple<string, int>(

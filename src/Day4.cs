@@ -4,16 +4,10 @@
 	{
 		public static int GetCardsWorth_v1()
 		{
-			string fileName = @"..\..\..\resources\Day4-Input.txt";
-			string[] lines = Array.Empty<string>();
-
-			if (File.Exists(fileName))
-			{
-				lines = File.ReadAllLines(fileName);
-			}
+			var lines = FileReader.ReadFile("4");
 
 			var cardParts = lines
-				.Select(l => l.Substring(l.IndexOf(':') + 1))
+				.Select(l => l[(l.IndexOf(':') + 1)..])
 				.Select(l => l.Split('|'));
 
 			int sum = 0;
@@ -34,17 +28,11 @@
 
 		public static int GetCardsWorth_v2()
 		{
-			string fileName = @"..\..\..\resources\Day4-Input.txt";
-			string[] lines = Array.Empty<string>();
+			var lines = FileReader.ReadFile("4");
 			char[] separators = new char[] {':', '|'};
 
-			if (File.Exists(fileName))
-			{
-				lines = File.ReadAllLines(fileName);
-			}
-
 			var cards = lines.Select(l => l.Split(separators));
-			int[] cardCounter = new int[lines.Length];
+			int[] cardCounter = new int[lines.Count()];
 			Array.Fill(cardCounter, 1);
 			int counter = 0;
 

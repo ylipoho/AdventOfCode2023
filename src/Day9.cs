@@ -4,13 +4,7 @@
 	{
 		public static int GetNewHistorySum_v1()
 		{
-			string fileName = @"..\..\..\resources\Day9-Input.txt";
-			List<string> lines = new List<string>();
-
-			if (File.Exists(fileName))
-			{
-				lines = File.ReadAllLines(fileName).ToList();
-			}
+			List<string> lines = FileReader.ReadFile("9").ToList();
 
 			List<List<int>> histories = lines.Select(l => l.Split(' ')
 															.Select(x => int.Parse(x))

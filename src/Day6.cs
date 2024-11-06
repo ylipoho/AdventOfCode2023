@@ -6,13 +6,7 @@ namespace AdventOfCode2023.src
 	{
 		public static int GetWaysToWinNumberMultiplication_v1()
 		{
-			string fileName = @"..\..\..\resources\Day6-Input.txt";
-			string[] lines = Array.Empty<string>();
-
-			if (File.Exists(fileName))
-			{
-				lines = File.ReadAllLines(fileName);
-			}
+			var lines = FileReader.ReadFile("6");
 
 			List<int[]> records = new List<int[]>();
 			foreach (var line in lines)
@@ -43,13 +37,7 @@ namespace AdventOfCode2023.src
 
 		public static int GetWaysToWinNumberMultiplication_v2()
 		{
-			string fileName = @"..\..\..\resources\Day6-Input.txt";
-			string[] lines = Array.Empty<string>();
-
-			if (File.Exists(fileName))
-			{
-				lines = File.ReadAllLines(fileName);
-			}
+			var lines = FileReader.ReadFile("6");
 
 			var stringNumbers = lines.Select(line => Regex.Matches(line, @"\d")
 														.Select(l => l.Value));

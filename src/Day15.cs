@@ -6,15 +6,11 @@ namespace AdventOfCode2023.src
 	{
 		public static int Get_v1()
 		{
-			string fileName = @"..\..\..\resources\Day15-Input.txt";
-			List<string> lines = new List<string>();
+			string[] substrings = FileReader
+										.ReadFile("15")
+										.ToList()[0]
+										.Split(',');
 
-			if (File.Exists(fileName))
-			{
-				lines = File.ReadAllLines(fileName).ToList();
-			}
-
-			string[] substrings = lines[0].Split(',');
 			List<int> currentValues = new List<int>();
 
 			foreach (var substring in substrings)

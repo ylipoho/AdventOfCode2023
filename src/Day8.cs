@@ -6,14 +6,7 @@ namespace AdventOfCode2023.src
 	{
 		public static int GetStepsCount_v1()
 		{
-			string fileName = @"..\..\..\resources\Day8-Input.txt";
-			List<string> lines = new List<string>();
-
-			if (File.Exists(fileName))
-			{
-				lines = File.ReadAllLines(fileName).ToList();
-			}
-
+			List<String> lines = FileReader.ReadFile("8").ToList();
 			string directionGuide = lines[0];
 			lines = lines.Skip(2).ToList();
 			List<string[]> words = new List<string[]>();
@@ -45,14 +38,7 @@ namespace AdventOfCode2023.src
 
 		public static long GetStepsCount_v2()
 		{
-			string fileName = @"..\..\..\resources\Day8-Input.txt";
-			List<string> lines = new List<string>();
-
-			if (File.Exists(fileName))
-			{
-				lines = File.ReadAllLines(fileName).ToList();
-			}
-
+			List<String> lines = FileReader.ReadFile("8").ToList();
 			string directionGuide = lines[0];
 			lines = lines.Skip(2).ToList();
 			List<string[]> words = new List<string[]>();

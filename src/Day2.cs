@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace AdventOfCode2023.src
 {
@@ -8,13 +9,7 @@ namespace AdventOfCode2023.src
 		{
 			// Initially the bag contained only 12 red cubes, 13 green cubes, and 14 blue cubes
 			int[] bag = { 12, 13, 14 };
-			string fileName = @"..\..\..\resources\Day2-Input.txt";
-			string[] lines = Array.Empty<string>();
-
-			if (File.Exists(fileName))
-			{
-				lines = File.ReadAllLines(fileName);
-			}
+			var lines = FileReader.ReadFile("2");
 
 			string redRegex = @"(?<=[:|,|;] )(\d+)(?= red)";
 			string greenRegex = @"(?<=[:|,|;] )(\d+)(?= green)";
@@ -42,13 +37,7 @@ namespace AdventOfCode2023.src
 
 		public static int GetPossibleGamesIdsSum_v2()
 		{
-			string fileName = @"..\..\..\resources\Day2-Input.txt";
-			string[] lines = Array.Empty<string>();
-
-			if (File.Exists(fileName))
-			{
-				lines = File.ReadAllLines(fileName);
-			}
+			var lines = FileReader.ReadFile("2");
 
 			string redRegex = @"(?<=[:|,|;] )(\d+)(?= red)";
 			string greenRegex = @"(?<=[:|,|;] )(\d+)(?= green)";

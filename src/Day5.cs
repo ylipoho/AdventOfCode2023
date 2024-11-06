@@ -6,13 +6,7 @@ namespace AdventOfCode2023.src
 	{
 		public static long GetLowestLocation_v1()
 		{
-			string fileName = @"..\..\..\resources\Day5-Input.txt";
-			string[] lines = Array.Empty<string>();
-
-			if (File.Exists(fileName))
-			{
-				lines = File.ReadAllLines(fileName);
-			}
+			var lines = (string[])FileReader.ReadFile("5");
 
 			// seeds numbers
 			long[] seeds = Regex.Matches(lines[0], @"\d+")

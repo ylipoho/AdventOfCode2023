@@ -6,22 +6,16 @@ namespace AdventOfCode2023.src
 	{
 		public static int GetEngineNumbersSum_v1()
 		{
-			string fileName = @"..\..\..\resources\Day3-Input.txt";
-			string[] lines = Array.Empty<string>();
-
-			if (File.Exists(fileName))
-			{
-				lines = File.ReadAllLines(fileName);
-			}
+			var lines = (string[])FileReader.ReadFile("3");
 
 			int sum = 0;
 
-			for (int i = 0; i < lines.Count(); i++)
+			for (int i = 0; i < lines.Length; i++)
 			{
 				Regex numberRegex = new Regex("\\d+");
 				MatchCollection matchCollection = numberRegex.Matches(lines[i]);
 
-				foreach (Match match in matchCollection)
+				foreach (Match match in matchCollection.Cast<Match>())
 				{
 					sum += HasNeighbours(lines, i, match) ? int.Parse(match.Value) : 0;	
 				}
