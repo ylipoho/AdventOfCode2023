@@ -11,6 +11,7 @@ namespace AdventOfCode2023
 			Console.WriteLine($" 2.1: {Day2.GetPossibleGamesIdsSum_v1()}");
 			Console.WriteLine($" 2.2: {Day2.GetPossibleGamesIdsSum_v2()}");
 			Console.WriteLine($" 3.1: {Day3.GetEngineNumbersSum_v1()}");
+			Console.WriteLine($" 3.2: {Day3.GetEngineNumbersSum_v2()}");
 			Console.WriteLine($" 4.1: {Day4.GetCardsWorth_v1()}");
 			Console.WriteLine($" 4.2: {Day4.GetCardsWorth_v2()}");
 			Console.WriteLine($" 5.1: {Day5.GetLowestLocation_v1()}");

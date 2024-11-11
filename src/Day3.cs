@@ -7,7 +7,6 @@ namespace AdventOfCode2023.src
 		public static int GetEngineNumbersSum_v1()
 		{
 			var lines = (string[])FileReader.ReadFile("3");
-
 			int sum = 0;
 
 			for (int i = 0; i < lines.Length; i++)
@@ -17,12 +16,51 @@ namespace AdventOfCode2023.src
 
 				foreach (Match match in matchCollection.Cast<Match>())
 				{
-					sum += HasNeighbours(lines, i, match) ? int.Parse(match.Value) : 0;	
+					sum += HasNeighbours(lines, i, match) ? int.Parse(match.Value) : 0;
 				}
-
 			}
 
 			return sum;
+		}
+
+		public static int GetEngineNumbersSum_v2()
+		{
+			var lines = (string[])FileReader.ReadFile("3");
+			List<(int Row, int Column)> gears = new();
+			List<(int Row, int Column, string Number)> numbers = new();
+			
+			for (int i = 0; i < lines.Length; i++)
+			{
+				MatchCollection matchCollection = new Regex("\\*").Matches(lines[i]);
+
+				foreach (Match match in matchCollection.Cast<Match>())
+				{
+					gears.Add((i, match.Index));
+				}
+
+				matchCollection = new Regex("\\d+").Matches(lines[i]);
+
+				foreach (Match match in matchCollection.Cast<Match>())
+                {
+					numbers.Add((i, match.Index, match.Value));
+                }
+			}
+
+			return gears
+					.Select(
+						gear =>
+							numbers
+								.Where(number => IsNearTheGear(number.Row, 
+															number.Column, 
+															number.Number.Length, 
+															gear.Row, 
+															gear.Column))
+								.ToList()
+					)
+					.Where(gearNumbers => gearNumbers.Count == 2)
+					.Select(gearNumbers => int.Parse(gearNumbers[0].Number) 
+										* int.Parse(gearNumbers[1].Number))
+					.Sum();
 		}
 
 		static bool HasNeighbours(string[] lines, int lineIndex, Match match)
@@ -47,6 +85,14 @@ namespace AdventOfCode2023.src
 							)
 					.Where(s => symbolRegex.IsMatch(s))
 					.Any();
+		}
+
+		static bool IsNearTheGear(int numberRow, int numberColumn, int numberLength, int gearRow, int gearColumn)
+		{
+			return numberRow - 1 <= gearRow
+				&& gearRow <= numberRow + 1
+				&& numberColumn - 1 <= gearColumn
+				&& gearColumn <= numberColumn + numberLength;
 		}
 	}
 }
